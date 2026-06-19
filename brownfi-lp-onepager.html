@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BrownFi V3 | LP Pitch</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0D0A06; color: #D0CBC4; font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; line-height: 1.6; }
+  .container { max-width: 980px; margin: 0 auto; padding: 0 28px; }
+
+  /* ── Header ── */
+  header { border-bottom: 1px solid #2A1C08; padding: 22px 0 17px; }
+  .header-inner { display: flex; justify-content: space-between; align-items: flex-end; }
+  .logo { font-size: 28px; font-weight: 600; color: #C47429; letter-spacing: 0.5px; font-family: 'Space Grotesk', sans-serif; }
+  .logo span { color: #D0CBC4; font-weight: 500; }
+  .tagline { margin-top: 5px; font-size: 12px; color: #9A8E80; font-style: italic; }
+  .doc-meta { text-align: right; }
+  .doc-label { display: inline-flex; align-items: center; gap: 8px; font-size: 10px; color: #C47429; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; font-family: 'Space Grotesk', sans-serif; border: 1px solid #C47429; border-radius: 3px; padding: 5px 12px; }
+  .doc-label::before, .doc-label::after { content: ''; display: block; width: 18px; height: 1px; background: #C47429; opacity: 0.5; }
+  .doc-date { font-size: 10.5px; color: #706A60; margin-top: 3px; }
+
+  /* ── Stats bar ── */
+  .stats-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: #2A1C08; border: 1px solid #2A1C08; border-radius: 8px; overflow: hidden; margin: 16px 0; }
+  .stat { background: #0F0C07; padding: 12px 16px; text-align: center; }
+  .stat-value { font-size: 21px; font-weight: 700; color: #C47429; letter-spacing: -0.5px; white-space: nowrap; }
+  .stat-label { font-size: 9px; color: #8A8278; text-transform: uppercase; letter-spacing: 1px; margin-top: 3px; }
+
+  /* ── Sections ── */
+  section { padding: 18px 0; border-bottom: 1px solid #1A1208; }
+  .section-title { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #C47429; margin-bottom: 12px; }
+  .section-title::before { content: '▸  '; }
+
+  /* ── Grids ── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 11px; }
+
+  /* ── Section 01 intro ── */
+  .intro-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 22px; margin-bottom: 16px; align-items: start; }
+  .intro-desc { font-size: 12.5px; color: #C0B8AE; line-height: 1.75; }
+  .intro-desc strong { color: #D0CBC4; }
+  .diff-list { border: 1px solid #1A1208; border-radius: 7px; overflow: hidden; }
+  .diff-item { display: flex; gap: 10px; align-items: flex-start; padding: 8px 13px; border-bottom: 1px solid #141008; font-size: 11.5px; color: #B8B0A6; line-height: 1.5; }
+  .diff-item:last-child { border-bottom: none; }
+  .diff-dot { width: 7px; height: 7px; background: #C47429; border-radius: 50%; flex-shrink: 0; margin-top: 4px; }
+  .diff-item strong { color: #C47429; font-weight: 600; }
+
+  /* ── Comparison matrix ── */
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .compare-table th { padding: 9px 14px; font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+  .th-feature { text-align: left !important; background: #090705; color: #706A60; width: 24%; }
+  .th-uni2 { background: #0D0B07; color: #8A8278; }
+  .th-uni3 { background: #0D0B07; color: #8A8278; }
+  .th-bf { background: #160E04; color: #C47429; border-bottom: 2px solid #C47429; }
+  .compare-table td { padding: 8px 14px; border-bottom: 1px solid #110D07; vertical-align: middle; font-size: 11.5px; }
+  .compare-table td.feat { background: #090705; color: #B8B0A4; font-weight: 500; }
+  .compare-table td.u2, .compare-table td.u3 { background: #0B0906; text-align: center; color: #A09488; }
+  .compare-table td.bf { background: #0F0B05; text-align: center; }
+  .compare-table tr:last-child td { border-bottom: none; }
+  .x   { color: #C07060; }
+  .ok  { color: #8AAA68; }
+  .win { color: #C47429; font-weight: 600; }
+  .cmp-note { font-size: 9.5px; color: #6A6458; font-style: italic; margin-top: 8px; }
+
+  /* ── Pricing flow ── */
+  .price-flow { display: flex; align-items: stretch; gap: 0; background: #090705; border: 1px solid #1A1008; border-radius: 8px; padding: 12px 14px; margin-bottom: 12px; overflow-x: auto; }
+  .pf-step { flex: 1; min-width: 88px; background: #0F0C07; border: 1px solid #221608; border-radius: 6px; padding: 9px 10px; text-align: center; }
+  .pf-step.final { background: #0A1206; border-color: #1A2A10; }
+  .pf-arrow { color: #6A5A40; font-size: 15px; display: flex; align-items: center; padding: 0 7px; flex-shrink: 0; }
+  .pf-lbl { font-size: 8px; color: #706A60; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; }
+  .pf-title { font-size: 11px; font-weight: 700; color: #C47429; margin-bottom: 3px; }
+  .pf-step.final .pf-title { color: #7EC85A; }
+  .pf-sub { font-size: 9px; color: #8A8278; font-family: 'Courier New', monospace; line-height: 1.45; }
+
+  /* ── 3 cards ── */
+  .card { background: #0F0C07; border: 1px solid #2A1C08; border-radius: 7px; padding: 13px 14px; }
+  .card-num { font-size: 24px; font-weight: 800; color: #3A3028; float: right; line-height: 1; }
+  .card-title { font-size: 12px; font-weight: 700; color: #C47429; margin-bottom: 5px; }
+  .card-body { font-size: 11px; color: #B8B0A6; line-height: 1.6; clear: both; }
+
+  /* ── Math formulas ── */
+  .math-section { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+  .math-group { background: #090705; border: 1px solid #1A1108; border-left: 3px solid #C47429; border-radius: 0 6px 6px 0; padding: 9px 13px; }
+  .math-lbl { font-size: 9px; color: #8A8278; text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 6px; font-weight: 600; }
+  .math-f { font-family: 'Courier New', monospace; font-size: 11px; color: #A89868; line-height: 1.85; white-space: pre-wrap; }
+  .math-f sub { font-size: 0.78em; vertical-align: sub; }
+  .math-f .kw  { color: #C47429; }
+  .math-f .dim { color: #706A60; }
+
+  /* ── Contracts table ── */
+  table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  th { text-align: left; padding: 7px 11px; background: #0F0C07; color: #8A8278; font-size: 9px; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #2A1C08; font-weight: 600; }
+  td { padding: 7px 11px; border-bottom: 1px solid #141008; color: #B8B0A4; vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td:first-child { color: #D0C4B0; font-weight: 500; }
+  .hl { color: #C47429 !important; font-weight: 600; }
+  .grn { color: #7EC85A !important; }
+  .tbd { color: #6A6458 !important; font-style: italic; }
+  .dim2 { color: #605A50 !important; font-style: italic; }
+
+  /* ── Audit badges ── */
+  .audit-row { display: flex; gap: 9px; flex-wrap: wrap; }
+  .audit-badge { display: flex; align-items: center; gap: 10px; background: #0F0C07; border: 1px solid #2A1C08; border-radius: 7px; padding: 11px 15px; flex: 1; min-width: 150px; }
+  .audit-check { width: 20px; height: 20px; background: #0C1E08; border: 1px solid #1C3E10; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #7EC85A; font-size: 11px; flex-shrink: 0; font-weight: 700; }
+  .audit-name { font-size: 13px; font-weight: 600; color: #D0CBC4; }
+  .audit-ver  { font-size: 9.5px; color: #8A8278; margin-top: 1px; }
+
+  /* ── Performance section ── */
+  .perf-layout { display: grid; grid-template-columns: 1.55fr 1fr; gap: 16px; align-items: start; }
+  .chart-label { font-size: 9px; color: #8A8278; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 7px; }
+  .chart-legend { display: flex; gap: 14px; margin-bottom: 8px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #B0A898; }
+  .legend-line { width: 20px; height: 2.5px; border-radius: 2px; display: inline-block; }
+  .legend-line.dashed { height: 0; border-top: 2px dashed #8A5820; }
+  .perf-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 7px; margin-top: 12px; }
+  .ps { padding: 9px 11px; background: #090705; border-left: 3px solid #C47429; }
+  .ps.s { border-left-color: #7A4818; }
+  .ps.b { border-left-color: #7E72B8; }
+  .ps-val { font-size: 18px; font-weight: 800; color: #C47429; margin: 1px 0; }
+  .ps.s .ps-val { color: #8A5820; }
+  .ps.b .ps-val { color: #7E72B8; }
+  .ps-lbl { font-size: 8.5px; color: #706A60; text-transform: uppercase; letter-spacing: .6px; }
+  .ps-sub { font-size: 9.5px; color: #9A9080; margin-top: 1px; }
+  .insight-box { background: #090705; border: 1px solid #1A1008; border-left: 4px solid #C47429; border-radius: 0 6px 6px 0; padding: 11px 14px; margin-top: 10px; }
+  .ib-title { font-size: 8.5px; color: #C47429; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; margin-bottom: 4px; }
+  .ib-body  { font-size: 10.5px; color: #B8B0A4; line-height: 1.65; }
+  .ib-body strong { color: #D4C8B8; }
+
+  /* ── Live Performance Showcases ── */
+  .showcase { border: 1px solid #2A1C08; border-radius: 8px; overflow: hidden; margin-bottom: 16px; }
+  .showcase-header { background: #130E07; border-bottom: 1px solid #2A1C08; padding: 10px 16px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .showcase-pair { font-size: 14px; font-weight: 700; color: #E8D5B8; font-family: 'Space Grotesk', sans-serif; margin-right: 4px; }
+  .showcase-badge { font-size: 8.5px; font-weight: 600; letter-spacing: 0.8px; padding: 2px 8px; border-radius: 3px; text-transform: uppercase; }
+  .showcase-badge.orange { background: #1E1208; border: 1px solid #C47429; color: #C47429; }
+  .showcase-badge.green  { background: #0C1C09; border: 1px solid #4A9030; color: #7EC85A; }
+  .showcase-badge.grey   { background: #0F0C07; border: 1px solid #3A3028; color: #8A8278; }
+  .showcase-context { margin-left: auto; font-size: 9.5px; color: #6A6458; font-style: italic; }
+  .showcase-body { display: grid; grid-template-columns: 1.55fr 1fr; }
+  .showcase-chart img { width: 100%; display: block; border-right: 1px solid #2A1C08; }
+  .showcase-portfolio img { width: 100%; display: block; object-fit: cover; height: 100%; }
+  .showcase-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: #2A1C08; border-top: 1px solid #2A1C08; }
+  .showcase-stat { background: #0F0C07; padding: 9px 14px; text-align: center; }
+  .showcase-stat-val { font-size: 17px; font-weight: 700; font-family: 'Space Grotesk', sans-serif; }
+  .showcase-stat-val.green { color: #7EC85A; }
+  .showcase-stat-val.red   { color: #C07060; }
+  .showcase-stat-val.grey  { color: #8A8278; }
+  .showcase-stat-val.orange { color: #C47429; }
+  .showcase-stat-lbl { font-size: 8.5px; color: #706A60; text-transform: uppercase; letter-spacing: 0.7px; margin-top: 2px; }
+
+  /* ── Callout box ── */
+  .callout { margin: 14px 0; padding: 13px 18px; background: #130E06; border: 1px solid #2E2010; border-radius: 6px; display: flex; align-items: center; gap: 14px; }
+  .callout-icon { font-size: 18px; flex-shrink: 0; line-height: 1; }
+  .callout p { font-size: 12.5px; font-weight: 500; color: #C8C0B4; line-height: 1.6; font-family: 'Space Grotesk', sans-serif; margin: 0; }
+  .callout p strong { color: #C47429; font-weight: 700; }
+
+  /* ── Note ── */
+  .note { font-size: 10px; color: #6A6458; font-style: italic; margin-top: 9px; padding-top: 7px; border-top: 1px solid #201810; }
+  .note strong { color: #807868; font-style: normal; }
+
+  /* ── Footer ── */
+  footer { padding: 15px 0 20px; display: flex; justify-content: space-between; align-items: center; }
+  .footer-brand { font-size: 10.5px; color: #6A6458; }
+  .footer-links { display: flex; gap: 20px; }
+  .footer-links a { font-size: 9.5px; color: #6A6458; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; }
+  .footer-links a:hover { color: #C47429; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- ── Header ── -->
+  <header>
+    <div class="header-inner">
+      <div style="display:flex; align-items:center; gap:16px;">
+        <img src="brownfi-logo.jpg" alt="BrownFi Logo" style="width:52px; height:52px; border-radius:10px; flex-shrink:0;">
+        <div>
+          <div class="logo">BrownFi <span>V3</span></div>
+          <div class="tagline">Oracle-Based AMM · High Capital Efficiency · Low Impermanent Loss · Dynamic Market Making</div>
+        </div>
+      </div>
+      <div class="doc-meta">
+        <div class="doc-label">One Pager</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── Stats bar ── -->
+  <div class="stats-bar">
+    <div class="stat">
+      <div class="stat-value">3.39×</div>
+      <div class="stat-label">Backtest Return (vs 0.90× BnH)</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">200×</div>
+      <div class="stat-label">Max Capital Efficiency vs UniV2</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">~0%</div>
+      <div class="stat-label">Loss-vs-Rebalancing Eliminated</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">4</div>
+      <div class="stat-label">Independent Security Audits</div>
+    </div>
+  </div>
+
+  <!-- ── 01: Protocol Overview ── -->
+  <section>
+    <div class="section-title">01 · Protocol Overview: BrownFi vs the Market</div>
+    <!-- What is BrownFi + why it's special -->
+    <p class="intro-desc" style="margin-bottom:14px;">BrownFi is an <strong>oracle-based AMM</strong> that anchors every swap price to live external oracles, not to a bonding curve or pool depth. This eliminates stale-price arbitrage (LVR) and allows the pool to offer competitive pricing with far less capital than traditional AMMs. BrownFi V3 is built on the same codebase as Uniswap V2. On top of that, it adds <strong>asymmetric liquidity concentration for base and quote assets</strong> (Kappa parameters), a formal <strong>bid-ask spread</strong>, and dynamic adaptive pricing, delivering concentrated liquidity efficiency without active position management. Multichain, fully audited.</p>
+    <!-- TL;DR + NAV chart side by side -->
+    <div style="margin-top:14px; display:grid; grid-template-columns:1fr 1.9fr; gap:14px; align-items:start;">
+
+      <!-- Left: TL;DR callout -->
+      <div class="callout" style="margin:0; flex-direction:column; align-items:flex-start; justify-content:center; gap:10px;">
+        <div style="display:flex; align-items:center; gap:10px;">
+          <span class="callout-icon" style="font-size:20px; line-height:1;">💡</span>
+          <span style="color:#9A9080; font-size:11px; font-weight:600; font-family:'Space Grotesk',sans-serif; letter-spacing:1px; text-transform:uppercase;">LP Outcome</span>
+        </div>
+        <p style="margin:0;"><strong>Lower impermanent loss, but significantly higher yields than Uniswap V2.</strong></p>
+      </div>
+
+      <!-- Right: Conceptual NAV chart -->
+      <svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+        <rect width="760" height="300" fill="#090705" rx="8"/>
+
+        <!-- Title row -->
+        <text x="20" y="24" fill="#C47429" font-family="'Space Grotesk','Segoe UI',sans-serif" font-size="10" font-weight="700" letter-spacing="1.5">BROWNFI EXPECTED RESULT</text>
+        <text x="740" y="24" text-anchor="end" fill="#504840" font-family="'Segoe UI',sans-serif" font-size="8" font-style="italic">Conceptual · actual backtest in §05</text>
+
+        <!-- Grid lines -->
+        <line x1="80" y1="60"  x2="710" y2="60"  stroke="#1A1208" stroke-width="1" stroke-dasharray="3,5"/>
+        <line x1="80" y1="110" x2="710" y2="110" stroke="#1A1208" stroke-width="1" stroke-dasharray="3,5"/>
+        <line x1="80" y1="160" x2="710" y2="160" stroke="#1A1208" stroke-width="1" stroke-dasharray="3,5"/>
+        <line x1="80" y1="210" x2="710" y2="210" stroke="#1A1208" stroke-width="1" stroke-dasharray="3,5"/>
+
+        <!-- Y-axis labels -->
+        <text x="72" y="64"  text-anchor="end" fill="#7A7268" font-family="'Segoe UI',sans-serif" font-size="9">$2.5</text>
+        <text x="72" y="114" text-anchor="end" fill="#7A7268" font-family="'Segoe UI',sans-serif" font-size="9">$2.0</text>
+        <text x="72" y="164" text-anchor="end" fill="#7A7268" font-family="'Segoe UI',sans-serif" font-size="9">$1.5</text>
+        <text x="72" y="214" text-anchor="end" fill="#7A7268" font-family="'Segoe UI',sans-serif" font-size="9">$1.0</text>
+
+        <!-- Axes -->
+        <line x1="80" y1="42"  x2="80"  y2="240" stroke="#2A2018" stroke-width="1"/>
+        <line x1="80" y1="240" x2="710" y2="240" stroke="#2A2018" stroke-width="1"/>
+        <text x="395" y="257" text-anchor="middle" fill="#6A6458" font-family="'Segoe UI',sans-serif" font-size="8.5" letter-spacing="1">TIME →</text>
+        <text x="12" y="145" text-anchor="middle" fill="#6A6458" font-family="'Segoe UI',sans-serif" font-size="8.5" letter-spacing="1" transform="rotate(-90,12,145)">NAV (USD)</text>
+
+        <!-- Crossover vertical guide -->
+        <line x1="400" y1="48" x2="400" y2="238" stroke="#C47429" stroke-width="1" stroke-dasharray="3,4" opacity="0.18"/>
+
+        <!-- UniV2 LP — always lowest NAV (dashed Uniswap pink, smooth curve) -->
+        <path d="M 80,210 C 260,208 480,192 710,170" fill="none" stroke="#FF007A" stroke-width="1.5" stroke-dasharray="5,4"/>
+
+        <!-- Buy & Hold — starts above BrownFi, crossed at x≈400, ends middle (blue-grey, dashed, smooth curve) -->
+        <path d="M 80,210 C 160,196 280,168 400,160 C 510,153 610,138 710,126" fill="none" stroke="#7E8EA8" stroke-width="2" stroke-dasharray="6,4"/>
+
+        <!-- BrownFi LP — starts below B&H, accelerates past at x≈400, ends highest NAV (orange, solid, smooth curve) -->
+        <path d="M 80,210 C 160,210 320,190 400,160 C 480,130 600,86 710,62" fill="none" stroke="#C47429" stroke-width="2.5"/>
+
+        <!-- Crossover dot -->
+        <circle cx="400" cy="160" r="4" fill="#C47429"/>
+        <circle cx="400" cy="160" r="8" fill="none" stroke="#C47429" stroke-width="1" opacity="0.3"/>
+
+        <!-- Legend -->
+        <line x1="90"  y1="280" x2="116" y2="280" stroke="#C47429" stroke-width="2.5"/>
+        <circle cx="103" cy="280" r="3" fill="#C47429"/>
+        <text x="121" y="284" fill="#C0B8AE" font-family="'Segoe UI',sans-serif" font-size="9">BrownFi LP</text>
+
+        <line x1="248" y1="280" x2="274" y2="280" stroke="#7E8EA8" stroke-width="2" stroke-dasharray="6,4"/>
+        <text x="279" y="284" fill="#C0B8AE" font-family="'Segoe UI',sans-serif" font-size="9">Buy &amp; Hold (50:50)</text>
+
+        <line x1="430" y1="280" x2="456" y2="280" stroke="#FF007A" stroke-width="1.5" stroke-dasharray="5,4"/>
+        <text x="461" y="284" fill="#C0B8AE" font-family="'Segoe UI',sans-serif" font-size="9">Uniswap V2 LP</text>
+      </svg>
+    </div>
+
+    <!-- Head-to-head comparison -->
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th class="th-feature">Feature</th>
+          <th class="th-uni2">Uniswap V2</th>
+          <th class="th-uni3">Uniswap V3</th>
+          <th class="th-bf">BrownFi V3</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="feat">Capital Efficiency</td>
+          <td class="u2 x">✗ 1× (full range)</td>
+          <td class="u3 ok">~ Concentrated</td>
+          <td class="bf win">✓ Up to 200×</td>
+        </tr>
+        <tr>
+          <td class="feat">LVR / Arb Extraction</td>
+          <td class="u2 x">✗ High (LP bleeds)</td>
+          <td class="u3 x">✗ High (LP bleeds)</td>
+          <td class="bf win">✓ Eliminated (oracle-based)</td>
+        </tr>
+        <tr>
+          <td class="feat">Impermanent Loss</td>
+          <td class="u2 x">✗ Moderate</td>
+          <td class="u3 x">✗ Severe (out-of-range)</td>
+          <td class="bf win">✓ Minimized</td>
+        </tr>
+        <tr>
+          <td class="feat">Active Management</td>
+          <td class="u2 ok">~ Not needed</td>
+          <td class="u3 x">✗ Required (ranges)</td>
+          <td class="bf win">✓ Not needed</td>
+        </tr>
+        <tr>
+          <td class="feat">Oracle Protection</td>
+          <td class="u2 x">✗ None</td>
+          <td class="u3 x">✗ None</td>
+          <td class="bf win">✓ Multi-source + guard</td>
+        </tr>
+        <tr>
+          <td class="feat">Bid-Ask Spread Income</td>
+          <td class="u2 x">✗ None</td>
+          <td class="u3 x">✗ None</td>
+          <td class="bf win">✓ Fixed + Dynamic</td>
+        </tr>
+        <tr>
+          <td class="feat">Liquidity Always Deployed</td>
+          <td class="u2 ok">~ Yes</td>
+          <td class="u3 x">✗ Goes out of range</td>
+          <td class="bf win">✓ Always active</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="cmp-note">✗ bad &nbsp;·&nbsp; ~ neutral &nbsp;·&nbsp; ✓ BrownFi advantage &nbsp;·&nbsp; LP tokens are standard ERC20s; no position management, no rebalancing required.</div>
+
+    <!-- Kappa Capital Efficiency Diagram removed -->
+    <div style="display:none;">
+      <svg viewBox="0 0 760 334" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block;">
+        <!-- Background -->
+        <rect width="760" height="334" fill="#090705" rx="8"/>
+
+        <!-- Title -->
+        <text x="380" y="27" text-anchor="middle" fill="#D0CBC4" font-family="'Space Grotesk','Segoe UI',sans-serif" font-size="14" font-weight="700">One Parameter. Any Concentration Level.</text>
+        <text x="380" y="44" text-anchor="middle" fill="#8A8278" font-family="'Segoe UI',sans-serif" font-size="9.5">BrownFi's Kappa controls liquidity depth, benchmarked against equivalent Uniswap V3 tick ranges</text>
+
+        <!-- Column headers -->
+        <text x="42" y="63" text-anchor="start"  fill="#9A9080" font-family="'Segoe UI',sans-serif" font-size="8.5" font-weight="600" letter-spacing="1">KAPPA</text>
+        <text x="380" y="63" text-anchor="middle" fill="#C47429" font-family="'Segoe UI',sans-serif" font-size="8.5" font-weight="600" letter-spacing="1">EFFICIENCY VS FULL-RANGE LP</text>
+        <text x="718" y="63" text-anchor="end"    fill="#9A9080" font-family="'Segoe UI',sans-serif" font-size="8.5" font-weight="600" letter-spacing="1">EQUIV. UNISWAP V3 RANGE</text>
+
+        <!-- Center divider line -->
+        <line x1="380" y1="69" x2="380" y2="308" stroke="#2A2018" stroke-width="1"/>
+
+        <!-- K=0.001 — bar 296→464, halfW=84 -->
+        <rect x="296" y="72" width="168" height="34" fill="#7A2208" rx="3"/>
+        <text x="380" y="94"  text-anchor="middle" fill="#7EC85A" font-family="'Space Grotesk','Segoe UI',sans-serif" font-size="13" font-weight="700">200×</text>
+        <text x="42"  y="94"  text-anchor="start"  fill="#D0CBC4" font-family="'Segoe UI',sans-serif" font-size="10">K=0.001</text>
+        <text x="472" y="94"  text-anchor="start"  fill="#9A9080" font-family="'Segoe UI',sans-serif" font-size="10">±1%</text>
+
+        <!-- K=0.01 — bar 266→494, halfW=114 -->
+        <rect x="266" y="112" width="228" height="34" fill="#8C3612" rx="3"/>
+        <text x="380" y="134" text-anchor="middle" fill="#7EC85A" font-family="'Space Grotesk','Segoe UI',sans-serif" font-size="13" font-weight="700">100×</text>
+        <text x="42"  y="134" text-anchor="start"  fill="#D0CBC4" font-family="'Segoe UI',sans-serif" font-size="10">K=0.01</text>
+        <text x="502" y="134" text-anchor="start"  fill="#9A9080" font-family="'Segoe UI',sans-serif" font-size="10">±2%</text>
+
+        <!-- K=0.1 — bar 215→545, halfW=165 -->
+        <rect x="215" y="152" width="330" height="34" fill="#A64E1C" rx="3"/>
+        <text x="380" y="174" text-anchor="middle" fill="#7EC85A" font-family="'Space Grotesk','Segoe UI',sans-serif" font-size="13" font-weight="700">18×</text>
+        <text x="42"  y="174" text-anchor="start"  fill="#D0CBC4" font-family="'Segoe UI',sans-serif" font-size="10">K=0.1</text>
+        <text x="553" y="174" text-anchor="start"  fill="#9A9080" font-family="'Segoe UI',sans-serif" font-size="10">±10%</text>
+
+        <!-- K=0.5 — bar 170→590, halfW=210 -->
+        <rect x="170" y="192" width="420" height="34" fill="#BE6A2A" rx="3"/>
+        <text x="380" y="214" text-anchor="middle" fill="#7EC85A" font-family="'Space Grotesk','Segoe UI',sans-serif" font-size="13" font-weight="700">4×</text>
+        <text x="42"  y="214" text-anchor="start"  fill="#D0CBC4" font-family="'Segoe UI',sans-serif" font-size="10">K=0.5</text>
+        <text x="598" y="214" text-anchor="start"  fill="#9A9080" font-family="'Segoe UI',sans-serif" font-size="10">−55% / +82%</text>
+
+        <!-- K=1 — bar 131→629, halfW=249 -->
+        <rect x="131" y="232" width="498" height="34" fill="#D08840" rx="3"/>
+        <text x="380" y="254" text-anchor="middle" fill="#7EC85A" font-family="'Space Grotesk','Segoe UI',sans-serif" font-size="13" font-weight="700">2×</text>
+        <text x="42"  y="254" text-anchor="start"  fill="#D0CBC4" font-family="'Segoe UI',sans-serif" font-size="10">K=1</text>
+        <text x="637" y="254" text-anchor="start"  fill="#9A9080" font-family="'Segoe UI',sans-serif" font-size="10">−75% / +405%</text>
+
+        <!-- K=2 — bar 80→680, halfW=300, full range -->
+        <rect x="80" y="272" width="600" height="34" fill="#E2B870" rx="3"/>
+        <text x="200" y="294" text-anchor="middle" fill="#7A5030" font-family="'Segoe UI',sans-serif" font-size="9.5">≡ Uniswap V2</text>
+        <text x="380" y="294" text-anchor="middle" fill="#7A5030" font-family="'Space Grotesk','Segoe UI',sans-serif" font-size="13" font-weight="700">1×</text>
+        <text x="560" y="294" text-anchor="middle" fill="#7A5030" font-family="'Segoe UI',sans-serif" font-size="9.5">≡ Uniswap V2</text>
+        <text x="42"  y="294" text-anchor="start"  fill="#D0CBC4" font-family="'Segoe UI',sans-serif" font-size="10">K=2</text>
+        <text x="688" y="294" text-anchor="start"  fill="#9A9080" font-family="'Segoe UI',sans-serif" font-size="10">Full range</text>
+
+        <!-- Fine print -->
+        <text x="380" y="330" text-anchor="middle" fill="#7A7268" font-family="'Segoe UI',sans-serif" font-size="8.5">Efficiency is relative to full-range liquidity (K=2 ≡ Uniswap V2). Uniswap V3 ranges are approximate equivalents based on comparable price coverage.</text>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ── 02: Pricing Model ── -->
+  <section>
+    <div class="section-title">02 · Pricing Model: Four-Layer Architecture</div>
+
+    <!-- Pricing pipeline flow -->
+    <div class="price-flow">
+      <div class="pf-step">
+        <div class="pf-lbl">Sources</div>
+        <div class="pf-title">Pyth + AMM</div>
+        <div class="pf-sub">off-chain oracle<br>on-chain TWAP</div>
+      </div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step">
+        <div class="pf-lbl">Layer 1</div>
+        <div class="pf-title">Oracle Blend</div>
+        <div class="pf-sub">w·Pyth + (1-w)·AMM<br>divergence guard</div>
+      </div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step">
+        <div class="pf-lbl">Layer 2</div>
+        <div class="pf-title">Skew Price</div>
+        <div class="pf-sub">adjusts for pool<br>imbalance (bounded)</div>
+      </div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step">
+        <div class="pf-lbl">Layer 3</div>
+        <div class="pf-title">Bid-Ask Spread</div>
+        <div class="pf-sub">fixed baseline +<br>dynamic (oracle gap)</div>
+      </div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step">
+        <div class="pf-lbl">Layer 4</div>
+        <div class="pf-title">Kappa Impact</div>
+        <div class="pf-sub">K ∈ [0.0001, 2]<br>asymm. K<sub>B</sub> / K<sub>Q</sub></div>
+      </div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-step final">
+        <div class="pf-lbl">Output</div>
+        <div class="pf-title">Execute</div>
+        <div class="pf-sub">final price<br>offered to trader</div>
+      </div>
+    </div>
+
+    <!-- 3 cards -->
+    <div class="grid-3" style="margin-bottom:11px">
+      <div class="card">
+        <span class="card-num">1</span>
+        <div class="card-title">Reference Price</div>
+        <div class="card-body">Anchors every swap to a live external oracle price, not pool depth. If price feeds disagree beyond a safe threshold, the trade is rejected to protect LPs.</div>
+      </div>
+      <div class="card">
+        <span class="card-num">2</span>
+        <div class="card-title">Bid-Ask Spread</div>
+        <div class="card-body">Every swap pays a small spread above or below the mid-price. The spread widens automatically during volatile markets, so LPs earn higher fees exactly when risk is highest.</div>
+      </div>
+      <div class="card">
+        <span class="card-num">3</span>
+        <div class="card-title">Price Impact (Kappa)</div>
+        <div class="card-body">Controls how tightly liquidity is concentrated around the current price. A lower Kappa means a deeper, more capital-efficient pool — and it adjusts independently for buy and sell sides.</div>
+      </div>
+    </div>
+
+    <!-- Key formulas -->
+    <div class="math-section">
+      <div class="math-group">
+        <div class="math-lbl">① Oracle blend + divergence guard</div>
+        <div class="math-f">ref_price = <span class="kw">oracle_price</span> × weight + pool_price × (1 − weight)
+<span class="dim">→ trade reverts if |oracle_price − pool_price| / ref_price > threshold</span></div>
+      </div>
+      <div class="math-group">
+        <div class="math-lbl">② Inventory skew adjustment</div>
+        <div class="math-f">· skew_factor = <span class="kw">λ</span> × (base_value − quote_value) / (base_value + quote_value)
+· skew_price  = ref_price × (1 − skew_factor)
+<span class="dim">→ nudges pool back toward 50/50</span></div>
+      </div>
+      <div class="math-group">
+        <div class="math-lbl">③ Bid-ask spread prices</div>
+        <div class="math-f">sell_price = skew_price × (1 + <span class="kw">spread</span>)
+buy_price  = skew_price × (1 − <span class="kw">spread</span>)
+<span class="dim">spread = base_fee + volatility_premium  →  widens when markets are uncertain</span></div>
+      </div>
+      <div class="math-group">
+        <div class="math-lbl">④ Swap execution (Kappa)</div>
+        <div class="math-f">amount_out = amount_in × price × (1 + price_impact)
+<span class="dim">price_impact ∝ trade_size / (pool_depth × <span class="kw">K</span>)  →  lower K = deeper pool, less slippage</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 03: Architecture & Smart Contracts ── -->
+  <section>
+    <div class="section-title">03 · Architecture &amp; Core Smart Contracts</div>
+
+    <!-- Architecture diagram -->
+    <div style="margin-bottom:14px;">
+      <svg viewBox="0 0 860 370" xmlns="http://www.w3.org/2000/svg" font-family="'Segoe UI',sans-serif" style="width:100%;height:auto;display:block;" role="img">
+        <title>BrownFi V3 — System Architecture</title>
+        <defs>
+          <marker id="arr3" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0.5 L0,6.5 L8,3.5 Z" fill="#C47429"/>
+          </marker>
+          <marker id="arb3" markerWidth="8" markerHeight="7" refX="7" refY="3.5" orient="auto">
+            <path d="M0,0.5 L0,6.5 L8,3.5 Z" fill="#7090B8"/>
+          </marker>
+        </defs>
+        <!-- Background -->
+        <rect width="860" height="370" fill="#0D0A06" rx="10"/>
+        <rect x="0.5" y="0.5" width="859" height="369" fill="none" stroke="#1E1408" stroke-width="1" rx="10"/>
+
+        <!-- ── Zone: User Entry ── -->
+        <rect x="16" y="22" width="160" height="148" fill="#110D07" rx="8" stroke="#261808" stroke-width="1"/>
+        <text x="96" y="37" text-anchor="middle" fill="#5A4A30" font-size="8" font-weight="600" letter-spacing="1.5">USER ENTRY</text>
+        <!-- Factory -->
+        <rect x="24" y="44" width="144" height="44" fill="#1C1409" rx="6" stroke="#A09080" stroke-width="1.4"/>
+        <text x="96" y="71" text-anchor="middle" fill="#E0D8CC" font-size="13.5" font-weight="600">Factory</text>
+        <!-- Router -->
+        <rect x="24" y="106" width="144" height="44" fill="#1C1409" rx="6" stroke="#A09080" stroke-width="1.4"/>
+        <text x="96" y="133" text-anchor="middle" fill="#E0D8CC" font-size="13.5" font-weight="600">Router</text>
+
+        <!-- ── Zone: Price Feeds ── -->
+        <rect x="16" y="180" width="160" height="114" fill="#0A1408" rx="8" stroke="#182810" stroke-width="1"/>
+        <text x="96" y="195" text-anchor="middle" fill="#3A6020" font-size="8" font-weight="600" letter-spacing="1.5">PRICE FEEDS</text>
+        <!-- Pyth -->
+        <ellipse cx="96" cy="220" rx="66" ry="21" fill="#0C1C09" stroke="#4A9030" stroke-width="1.5"/>
+        <text x="96" y="225" text-anchor="middle" fill="#7EC85A" font-size="11">Pyth Network</text>
+        <!-- Chainlink -->
+        <ellipse cx="96" cy="267" rx="66" ry="21" fill="#0C1C09" stroke="#4A9030" stroke-width="1.5"/>
+        <text x="96" y="272" text-anchor="middle" fill="#7EC85A" font-size="11">Chainlink / Redstone</text>
+
+        <!-- ── Oracle Gateway ── -->
+        <rect x="210" y="182" width="168" height="112" fill="#1A1208" rx="8" stroke="#C47429" stroke-width="1.8"/>
+        <text x="294" y="204" text-anchor="middle" fill="#E8D5B8" font-size="13" font-weight="600">Oracle Gateway</text>
+        <text x="294" y="220" text-anchor="middle" fill="#7A6A50" font-size="9" font-style="italic">aggregated price feed</text>
+        <line x1="224" y1="227" x2="364" y2="227" stroke="#2A1C0C" stroke-width="1"/>
+        <text x="294" y="243" text-anchor="middle" fill="#706858" font-size="9">blends Pyth + AMM TWAP</text>
+        <text x="294" y="258" text-anchor="middle" fill="#706858" font-size="9">outputs skew + spread price</text>
+        <text x="294" y="273" text-anchor="middle" fill="#706858" font-size="9">reverts on source divergence</text>
+
+        <!-- ── V3 Pairs (main box) ── -->
+        <rect x="428" y="18" width="418" height="282" fill="#130E07" rx="10" stroke="#C47429" stroke-width="2.5"/>
+        <text x="637" y="42" text-anchor="middle" fill="#E8D5B8" font-size="15" font-weight="700" letter-spacing="0.5">V3 Pairs</text>
+        <text x="637" y="58" text-anchor="middle" fill="#7A6A50" font-size="9.5">pool reserves  ·  LP mint/burn  ·  protocol fee</text>
+
+        <!-- add LP sub-box -->
+        <rect x="446" y="68" width="182" height="162" fill="#0E0A05" rx="6" stroke="#5A5445" stroke-width="1.2" stroke-dasharray="5,4"/>
+        <text x="537" y="90" text-anchor="middle" fill="#A89078" font-size="11" font-weight="600" letter-spacing="0.5">ADD LP</text>
+        <line x1="460" y1="97" x2="614" y2="97" stroke="#251A0C" stroke-width="1"/>
+        <text x="537" y="115" text-anchor="middle" fill="#6A5A48" font-size="9">deposit base + quote tokens</text>
+        <text x="537" y="131" text-anchor="middle" fill="#6A5A48" font-size="9">receive ERC20 LP tokens</text>
+        <text x="537" y="147" text-anchor="middle" fill="#6A5A48" font-size="9">oracle-protected pricing</text>
+        <text x="537" y="163" text-anchor="middle" fill="#6A5A48" font-size="9">no active management</text>
+
+        <!-- swap sub-box -->
+        <rect x="642" y="68" width="186" height="162" fill="#0E0A05" rx="6" stroke="#5A5445" stroke-width="1.2" stroke-dasharray="5,4"/>
+        <text x="735" y="90" text-anchor="middle" fill="#A89078" font-size="11" font-weight="600" letter-spacing="0.5">SWAP</text>
+        <line x1="656" y1="97" x2="814" y2="97" stroke="#251A0C" stroke-width="1"/>
+        <text x="735" y="115" text-anchor="middle" fill="#6A5A48" font-size="9">oracle-based execution</text>
+        <text x="735" y="131" text-anchor="middle" fill="#6A5A48" font-size="9">skew + bid-ask spread</text>
+        <text x="735" y="147" text-anchor="middle" fill="#6A5A48" font-size="9">Kappa price impact</text>
+        <text x="735" y="163" text-anchor="middle" fill="#6A5A48" font-size="9">exact-in / exact-out</text>
+
+        <!-- ── Config Contract ── -->
+        <rect x="210" y="320" width="408" height="44" fill="#1A1208" rx="8" stroke="#7090B8" stroke-width="1.8"/>
+        <text x="414" y="339" text-anchor="middle" fill="#D8DCF0" font-size="13" font-weight="600">Config Contract</text>
+        <text x="414" y="355" text-anchor="middle" fill="#7A8A9A" font-size="9" font-style="italic">K · λ · fee · spread  —  updatable without redeploying pools</text>
+
+        <!-- ══ ARROWS ══ -->
+        <!-- Factory → V3 Pairs (routed above sub-boxes via header) -->
+        <polyline points="168,66 394,66 394,42 426,42" fill="none" stroke="#C47429" stroke-width="1.4" marker-end="url(#arr3)"/>
+        <text x="281" y="57" text-anchor="middle" fill="#5A4A30" font-size="9" font-style="italic">create pools</text>
+
+        <!-- Router → V3 Pairs (routed above sub-boxes) -->
+        <polyline points="168,128 404,128 404,54 426,54" fill="none" stroke="#C47429" stroke-width="1.4" marker-end="url(#arr3)"/>
+        <text x="290" y="140" text-anchor="middle" fill="#5A4A30" font-size="9" font-style="italic">route swaps</text>
+
+        <!-- Pyth → Oracle GW -->
+        <line x1="162" y1="220" x2="208" y2="226" stroke="#C47429" stroke-width="1.3" marker-end="url(#arr3)"/>
+
+        <!-- Chainlink → Oracle GW -->
+        <line x1="162" y1="267" x2="208" y2="257" stroke="#C47429" stroke-width="1.3" marker-end="url(#arr3)"/>
+
+        <!-- Oracle GW → V3 Pairs -->
+        <line x1="378" y1="238" x2="426" y2="238" stroke="#C47429" stroke-width="1.4" marker-end="url(#arr3)"/>
+        <text x="402" y="230" text-anchor="middle" fill="#5A4A30" font-size="8.5" font-style="italic">price feed</text>
+
+        <!-- Config → Oracle GW (blue-grey, params) -->
+        <line x1="300" y1="320" x2="300" y2="296" stroke="#7090B8" stroke-width="1.3" marker-end="url(#arb3)"/>
+
+        <!-- Config → V3 Pairs (blue-grey, params) -->
+        <polyline points="562,320 636,320 636,300" fill="none" stroke="#7090B8" stroke-width="1.3" marker-end="url(#arb3)"/>
+        <text x="600" y="314" text-anchor="middle" fill="#5A7090" font-size="8.5" font-style="italic">K, fee</text>
+      </svg>
+    </div>
+
+    <!-- Contracts table -->
+    <table>
+      <thead><tr><th>Contract</th><th>Role</th></tr></thead>
+      <tbody>
+        <tr><td>Factory</td><td>Deploys V3 pairs (PairCreator role)</td></tr>
+        <tr><td>Router</td><td>Swap entry: exact-in &amp; exact-out</td></tr>
+        <tr><td>Oracle Gateway</td><td>Aggregates Pyth + AMM TWAP; outputs skew &amp; spread price</td></tr>
+        <tr><td>V3 Pair</td><td>Reserves, LP mint/burn, protocol fee</td></tr>
+        <tr><td>Config Contract</td><td>All tunable params (K, fee, spread, λ, γ), stored outside the pool</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ── 04: Audits ── -->
+  <section>
+    <div class="section-title">04 · Security Audits</div>
+    <div class="audit-row">
+      <div class="audit-badge"><div class="audit-check">✓</div><div><div class="audit-name">Verichain</div><div class="audit-ver">BrownFi V1</div></div></div>
+      <div class="audit-badge"><div class="audit-check">✓</div><div><div class="audit-name">Certik</div><div class="audit-ver">BrownFi V2</div></div></div>
+      <div class="audit-badge"><div class="audit-check">✓</div><div><div class="audit-name">Zenith</div><div class="audit-ver">BrownFi V3</div></div></div>
+      <div class="audit-badge"><div class="audit-check">✓</div><div><div class="audit-name">Sherlock</div><div class="audit-ver">BrownFi V3</div></div></div>
+    </div>
+    <div class="note">Non-custodial · No role can withdraw LP funds · LP withdrawals remain executable even when paused · Reports available on request</div>
+  </section>
+
+  <!-- ── 05: Performance ── -->
+  <section>
+    <div class="section-title">05 · Backtesting &amp; Performance Evidence</div>
+    <div class="perf-layout">
+
+      <!-- Left: TVL line chart -->
+      <div>
+        <div class="chart-label">Pool TVL vs Buy-and-Hold · ETH/USDC · Berachain · 277 Days (Aug 2025 – Jun 2026) · $1.00 starting capital</div>
+        <div class="chart-legend">
+          <span class="legend-item"><span class="legend-line" style="background:#C47429"></span>BrownFi V3 Dynamic</span>
+          <span class="legend-item"><span class="legend-line dashed"></span>BrownFi Static</span>
+          <span class="legend-item"><span class="legend-line" style="background:#7E72B8"></span>Buy &amp; Hold</span>
+        </div>
+        <canvas id="tvlChart" height="165"></canvas>
+        <div class="perf-stats">
+          <div class="ps">
+            <div class="ps-lbl">BrownFi V3 Dynamic</div>
+            <div class="ps-val">$3.39</div>
+            <div class="ps-sub">Sharpe 1.68 · +274% vs BnH</div>
+          </div>
+          <div class="ps s">
+            <div class="ps-lbl">BrownFi Static</div>
+            <div class="ps-val">$2.29</div>
+            <div class="ps-sub">Sharpe 0.98 · +153% vs BnH</div>
+          </div>
+          <div class="ps b">
+            <div class="ps-lbl">Buy &amp; Hold</div>
+            <div class="ps-val">$0.90</div>
+            <div class="ps-sub">ETH fell −19%</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Attribution + insight -->
+      <div>
+        <div class="chart-label">Where the Edge Comes From (PnL Attribution)</div>
+        <canvas id="attrChart" height="165"></canvas>
+        <div class="insight-box">
+          <div class="ib-title">Long Realized Volatility</div>
+          <div class="ib-body">BrownFi absorbs panic sellers at volatility lows; the gain is <strong>locked permanently</strong> when price recovers. Bounded inventory (|I|≤0.8) + constant rebalancing resets capacity for every oscillation. The pool bleeds slightly in calm markets; it earns large on V-shaped reversals.</div>
+        </div>
+      </div>
+
+    </div>
+    <div class="note">⚠ In-sample backtest · ETH/USDC · Berachain · 2-second blocktime · idealized fill model; actual results will differ · Starting capital $1.00 · Not financial advice</div>
+  </section>
+
+  <!-- ── 06: Live Performance ── -->
+  <section>
+    <div class="section-title">06 · Recent Live Performance</div>
+    <p style="font-size:11px; color:#8A8278; font-style:italic; margin-bottom:14px;">Real LP positions on BrownFi V3 Beta · Berachain · as of Jun 19, 2026</p>
+
+    <!-- Showcase 1: WETH/USDC.e -->
+    <div class="showcase">
+      <div class="showcase-header">
+        <span class="showcase-pair">WETH / USDC.e</span>
+        <span class="showcase-badge green">Berachain</span>
+        <span class="showcase-badge orange">V3 Official</span>
+        <span class="showcase-badge grey">Fee 0.03%</span>
+      </div>
+      <div class="showcase-body">
+        <div class="showcase-chart">
+          <img src="berachain%20-%20weth-usdc.png" alt="WETH/USDC.e LPing vs Buy&Hold chart"/>
+        </div>
+        <div class="showcase-portfolio">
+          <img src="smokey-weth-usdc-cropped.png" alt="WETH/USDC.e LP portfolio position"/>
+        </div>
+      </div>
+      <div class="showcase-stats">
+        <div class="showcase-stat">
+          <div class="showcase-stat-val green">+1.55%</div>
+          <div class="showcase-stat-lbl">LPing PnL (+$60.75)</div>
+        </div>
+        <div class="showcase-stat">
+          <div class="showcase-stat-val grey">+1.47%</div>
+          <div class="showcase-stat-lbl">Buy &amp; Hold PnL (+$57.81)</div>
+        </div>
+        <div class="showcase-stat">
+          <div class="showcase-stat-val orange">+$2.94</div>
+          <div class="showcase-stat-lbl">LP edge vs. Buy &amp; Hold</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Showcase 2: BERA/HONEY -->
+    <div class="showcase">
+      <div class="showcase-header">
+        <span class="showcase-pair">BERA / HONEY</span>
+        <span class="showcase-badge green">Berachain</span>
+        <span class="showcase-badge orange">V3 Official</span>
+      </div>
+      <div class="showcase-body">
+        <div class="showcase-chart">
+          <img src="bera1.png" alt="BERA/HONEY LPing vs Buy&Hold chart"/>
+        </div>
+        <div class="showcase-portfolio">
+          <img src="smokey-bera-honey-cropped.png" alt="BERA/HONEY LP portfolio position"/>
+        </div>
+      </div>
+      <div class="showcase-stats">
+        <div class="showcase-stat">
+          <div class="showcase-stat-val red">−2.73%</div>
+          <div class="showcase-stat-lbl">LPing PnL (−$110.02)</div>
+        </div>
+        <div class="showcase-stat">
+          <div class="showcase-stat-val red" style="opacity:0.65;">−3.58%</div>
+          <div class="showcase-stat-lbl">Buy &amp; Hold PnL (−$143.98)</div>
+        </div>
+        <div class="showcase-stat">
+          <div class="showcase-stat-val orange">+$33.96</div>
+          <div class="showcase-stat-lbl">LP edge vs. Buy &amp; Hold</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 07: Pool Caps ── -->
+  <section>
+    <div class="section-title">07 · Pool Parameters &amp; Risk Caps</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Pool</th>
+          <th>Imbalance Cap (γ)</th>
+          <th>Kappa (K<sub>B</sub> / K<sub>Q</sub>)</th>
+          <th>Fee</th>
+          <th>TVL Cap</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>ETH / USDC</td><td>90% / 10%</td><td class="tbd">TBD</td><td class="tbd">TBD</td><td class="tbd">TBD</td></tr>
+        <tr><td>BERA / USDC</td><td>90% / 10%</td><td class="tbd">TBD</td><td class="tbd">TBD</td><td class="tbd">TBD</td></tr>
+        <tr><td>wBTC / USDC</td><td>90% / 10%</td><td class="tbd">TBD</td><td class="tbd">TBD</td><td class="tbd">TBD</td></tr>
+        <tr><td class="dim2">+ additional pools</td><td>90% / 10%</td><td colspan="3" class="dim2">All params live-tunable by BizOps role, no redeployment needed</td></tr>
+      </tbody>
+    </table>
+    <div class="note">γ (gamma) circuit breaker: no single swap may push the pool beyond 90/10% split. Partial fills returned to sender.</div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <div style="text-align:center; padding:36px 0 28px; border-top:1px solid #2A1C08; margin-top:8px;">
+    <p style="font-size:11.5px; color:#8A8278; margin-bottom:18px; letter-spacing:0.3px;">Ready to put your assets to work?</p>
+    <a href="https://app.brownfi.io/pool" target="_blank" style="
+      display:inline-block;
+      background:#C47429;
+      color:#0D0A06;
+      font-family:'Space Grotesk',sans-serif;
+      font-size:14px;
+      font-weight:700;
+      letter-spacing:0.5px;
+      padding:14px 42px;
+      border-radius:6px;
+      text-decoration:none;
+      transition:opacity 0.15s;
+    " onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">
+      Start LPing on BrownFi →
+    </a>
+    <p style="font-size:10px; color:#5A5248; margin-top:14px;">app.brownfi.io/pool</p>
+  </div>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <div class="footer-brand">BrownFi V3 · Berachain · 2026 · Confidential, not for public distribution</div>
+    <div class="footer-links">
+      <a href="#">GitHub</a>
+      <a href="#">Docs</a>
+      <a href="#">Audit Reports</a>
+      <a href="#">Contact</a>
+    </div>
+  </footer>
+
+</div><!-- /container -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+(function(){
+  /* ── TVL line chart ── */
+  const lbs = ['Aug 25','','Sep','','Oct 10①','','Nov','','Dec','','Jan 26','Feb 4②','','Feb','Mar','','Apr','','May','Jun 26'];
+  const bnh  = [1.00,1.04,1.13,1.31,1.22,1.28,1.24,1.18,1.12,1.05,0.99,0.77,0.84,0.87,0.89,0.87,0.86,0.87,0.89,0.90];
+  const stat = [1.00,1.03,1.10,1.28,1.56,1.59,1.63,1.66,1.69,1.73,1.76,2.04,2.13,2.18,2.21,2.23,2.26,2.27,2.28,2.29];
+  const dyn  = [1.00,1.04,1.13,1.34,1.76,1.80,1.88,1.95,2.01,2.08,2.15,2.74,2.86,2.98,3.08,3.18,3.25,3.31,3.35,3.39];
+
+  const evPlugin = {
+    id: 'ev',
+    afterDraw(ch) {
+      const { ctx, scales: { x, y } } = ch;
+      [[4,'① Flash-crash\n(Oct 10, 2025)'],[11,'② Sell-off\n(Feb 4–6, 2026)']].forEach(([i,t]) => {
+        const px = x.getPixelForValue(i);
+        ctx.save();
+        ctx.strokeStyle = 'rgba(196,116,41,0.45)'; ctx.lineWidth = 1; ctx.setLineDash([3,3]);
+        ctx.beginPath(); ctx.moveTo(px, y.top); ctx.lineTo(px, y.bottom); ctx.stroke();
+        ctx.setLineDash([]); ctx.fillStyle = '#C8A878'; ctx.font = 'bold 8.5px Segoe UI';
+        t.split('\n').forEach((l, j) => ctx.fillText(l, px + 4, y.top + 11 + j * 11));
+        ctx.restore();
+      });
+    }
+  };
+  Chart.register(evPlugin);
+
+  new Chart(document.getElementById('tvlChart'), {
+    type: 'line',
+    data: { labels: lbs, datasets: [
+      { label:'BrownFi V3 Dynamic', data: dyn,  borderColor:'#C47429', borderWidth:2.5, tension:.35, fill:false, pointRadius:0, pointHoverRadius:4 },
+      { label:'BrownFi Static',     data: stat, borderColor:'#8A5820', borderWidth:1.5, borderDash:[5,3], tension:.35, fill:false, pointRadius:0, pointHoverRadius:3 },
+      { label:'Buy & Hold',         data: bnh,  borderColor:'#7E72B8', borderWidth:1.5, tension:.35, fill:false, pointRadius:0, pointHoverRadius:3 }
+    ]},
+    options: {
+      responsive: true,
+      interaction: { mode:'index', intersect:false },
+      plugins: {
+        legend: { display:false },
+        tooltip: { backgroundColor:'#1A1408', borderColor:'#2A1C08', borderWidth:1, titleColor:'#C47429', bodyColor:'#D0CBC4',
+          callbacks: { label: i => ` ${i.dataset.label}: ${Number(i.raw).toFixed(2)}×` }}
+      },
+      scales: {
+        x: { grid:{ color:'rgba(18,11,4,0.9)' }, ticks:{ color:'#9A9080', font:{ size:8.5 }, maxRotation:0 }},
+        y: { min:.5, max:3.7, grid:{ color:'rgba(18,11,4,0.9)' }, ticks:{ color:'#9A9080', font:{ size:9 }, callback: v => v.toFixed(1)+'×' }}
+      }
+    }
+  });
+
+  /* ── Attribution waterfall ── */
+  new Chart(document.getElementById('attrChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Volatility\nevents\n(3 days)', 'Regular\ntrading\n(274 days)', 'Net PnL\nvs\nBuy-and-Hold'],
+      datasets: [{
+        data: [2.74, -1.35, 1.39],
+        backgroundColor: ['rgba(196,116,41,0.85)', 'rgba(126,114,184,0.5)', 'rgba(196,116,41,1.0)'],
+        borderColor:      ['#C47429',               '#7E72B8',               '#C47429'],
+        borderWidth: 1.5, borderRadius: 3
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { display:false },
+        tooltip: { backgroundColor:'#1A1408', borderColor:'#2A1C08', borderWidth:1, titleColor:'#C47429', bodyColor:'#D0CBC4',
+          callbacks: { label: i => ` ${i.raw > 0 ? '+' : ''}${Number(i.raw).toFixed(2)} PnL` }}
+      },
+      scales: {
+        x: { grid:{ color:'rgba(18,11,4,0.9)' }, ticks:{ color:'#9A9080', font:{ size:9 }}},
+        y: { min:-1.8, max:3.2, grid:{ color:'rgba(18,11,4,0.9)' }, ticks:{ color:'#9A9080', font:{ size:9 }, callback: v => (v>0?'+':'')+v.toFixed(1) }}
+      }
+    }
+  });
+})();
+</script>
+</body>
+</html>
