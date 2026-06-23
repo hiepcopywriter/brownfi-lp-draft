@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #0D0A06; color: #D0CBC4; font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; line-height: 1.6; zoom: 1.25; }
+  body { background: #0D0A06; color: #D0CBC4; font-family: 'Segoe UI', Arial, sans-serif; font-size: 14px; line-height: 1.6; }
   .container { max-width: 980px; margin: 0 auto; padding: 0 28px; }
 
   /* ── Header ── */
@@ -194,43 +194,60 @@
   /* ── Table scroll wrapper ── */
   .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
+  /* ── Desktop zoom (only on large screens) ── */
+  @media (min-width: 901px) {
+    body { zoom: 1.25; }
+  }
+
   /* ── Tablet (≤900px) ── */
   @media (max-width: 900px) {
-    body { zoom: 1; font-size: 13px; }
+    body { font-size: 13px; }
     .container { padding: 0 18px; }
     .header-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
     .stats-bar { grid-template-columns: repeat(2, 1fr); }
     .intro-grid { grid-template-columns: 1fr; }
     .diagram-grid { grid-template-columns: 1fr !important; }
     .grid-2 { grid-template-columns: 1fr; }
-    .grid-3 { grid-template-columns: 1fr 1fr; }
+    .grid-3 { grid-template-columns: 1fr; }
     .math-section { grid-template-columns: 1fr; }
     .audit-row { grid-template-columns: 1fr; }
-    .perf-stats { grid-template-columns: repeat(3, 1fr); }
     .showcase-body { grid-template-columns: 1fr; }
     .showcase-portfolio { display: none; }
     .showcase-stats { grid-template-columns: repeat(3, 1fr); }
-    footer { flex-direction: column; gap: 14px; align-items: center; }
+    .perf-stats { grid-template-columns: repeat(3, 1fr); }
+    .price-flow { overflow-x: auto; }
+    footer { flex-direction: column; align-items: center; gap: 16px; }
   }
 
   /* ── Mobile (≤540px) ── */
   @media (max-width: 540px) {
     body { font-size: 12px; }
     .container { padding: 0 14px; }
-    .logo { font-size: 22px; }
-    .tagline { font-size: 11px; }
-    .stat-value { font-size: 17px; }
-    .stat-label { font-size: 10px; letter-spacing: 0.5px; }
+    .logo { font-size: 20px; }
+    .tagline { font-size: 11px; white-space: normal; }
+    .header-inner a img { width: 38px !important; height: 38px !important; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .stat { padding: 10px 8px; }
+    .stat-value { font-size: 16px; white-space: normal; }
+    .stat-label { font-size: 9px; letter-spacing: 0.3px; }
     .grid-3 { grid-template-columns: 1fr; }
     .perf-stats { grid-template-columns: 1fr; }
     .showcase-stats { grid-template-columns: repeat(2, 1fr); }
     .price-flow { gap: 0; padding: 10px; }
-    .pf-step { min-width: 76px; padding: 7px 7px; }
     .pf-sub { display: none; }
+    .pf-step { min-width: 68px; padding: 6px 5px; }
     .audit-card { padding: 14px 16px; }
     .callout { flex-direction: column; gap: 8px; }
-    .section-title { font-size: 9px; }
-    .footer-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
+    .section-title { font-size: 9px; letter-spacing: 1.5px; }
+    .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+    .doc-label { font-size: 8px; padding: 4px 8px; letter-spacing: 2px; }
+    .math-f { font-size: 11px; }
+    .compare-table td,
+    .compare-table th { padding: 6px 8px; font-size: 11px; }
+    .card { padding: 11px 12px; }
+    .audit-name { font-size: 13px; }
+    .ps-val { font-size: 15px; }
+    .showcase-stat-val { font-size: 14px; }
   }
 </style>
 </head>
@@ -645,6 +662,7 @@ buy_price  = skew_price × (1 − <span class="kw">spread</span>)
     </div>
 
     <!-- Contracts table -->
+    <div class="table-scroll">
     <table>
       <thead><tr><th>Contract</th><th>Role</th><th>Berachain</th><th>HyperEVM</th></tr></thead>
       <tbody>
@@ -680,6 +698,7 @@ buy_price  = skew_price × (1 − <span class="kw">spread</span>)
         </tr>
       </tbody>
     </table>
+    </div><!-- /table-scroll -->
   </section>
 
   <!-- ── 04: Audits ── -->
