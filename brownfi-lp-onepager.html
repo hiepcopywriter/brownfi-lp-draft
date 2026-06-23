@@ -190,6 +190,48 @@
   .footer-links { display: flex; gap: 20px; }
   .footer-links a { font-size: 11px; color: #6A6458; text-decoration: none; text-transform: uppercase; letter-spacing: 1px; }
   .footer-links a:hover { color: #C47429; }
+
+  /* ── Table scroll wrapper ── */
+  .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+  /* ── Tablet (≤900px) ── */
+  @media (max-width: 900px) {
+    body { zoom: 1; font-size: 13px; }
+    .container { padding: 0 18px; }
+    .header-inner { flex-direction: column; align-items: flex-start; gap: 10px; }
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+    .intro-grid { grid-template-columns: 1fr; }
+    .diagram-grid { grid-template-columns: 1fr !important; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .grid-3 { grid-template-columns: 1fr 1fr; }
+    .math-section { grid-template-columns: 1fr; }
+    .audit-row { grid-template-columns: 1fr; }
+    .perf-stats { grid-template-columns: repeat(3, 1fr); }
+    .showcase-body { grid-template-columns: 1fr; }
+    .showcase-portfolio { display: none; }
+    .showcase-stats { grid-template-columns: repeat(3, 1fr); }
+    footer { flex-direction: column; gap: 14px; align-items: center; }
+  }
+
+  /* ── Mobile (≤540px) ── */
+  @media (max-width: 540px) {
+    body { font-size: 12px; }
+    .container { padding: 0 14px; }
+    .logo { font-size: 22px; }
+    .tagline { font-size: 11px; }
+    .stat-value { font-size: 17px; }
+    .stat-label { font-size: 10px; letter-spacing: 0.5px; }
+    .grid-3 { grid-template-columns: 1fr; }
+    .perf-stats { grid-template-columns: 1fr; }
+    .showcase-stats { grid-template-columns: repeat(2, 1fr); }
+    .price-flow { gap: 0; padding: 10px; }
+    .pf-step { min-width: 76px; padding: 7px 7px; }
+    .pf-sub { display: none; }
+    .audit-card { padding: 14px 16px; }
+    .callout { flex-direction: column; gap: 8px; }
+    .section-title { font-size: 9px; }
+    .footer-links { gap: 16px; flex-wrap: wrap; justify-content: center; }
+  }
 </style>
 </head>
 <body>
@@ -246,7 +288,7 @@
     </div>
 
     <!-- Two diagrams side by side -->
-    <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; align-items:start; margin-bottom:28px;">
+    <div class="diagram-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:14px; align-items:start; margin-bottom:28px;">
 
       <!-- Left: Liquidity concentration comparison -->
       <img src="kappa-concentration.svg" alt="BrownFi Kappa — Capital Efficiency vs Uniswap V3" style="width:100%;height:auto;display:block;border-radius:8px;"/>
@@ -332,6 +374,7 @@
     </div>
 
     <!-- Head-to-head comparison -->
+    <div class="table-scroll">
     <table class="compare-table">
       <thead>
         <tr>
@@ -386,6 +429,7 @@
         </tr>
       </tbody>
     </table>
+    </div><!-- /table-scroll -->
     <div class="cmp-note">✗ bad &nbsp;·&nbsp; ~ neutral &nbsp;·&nbsp; ✓ BrownFi advantage &nbsp;·&nbsp; LP tokens are standard ERC20s; no position management, no rebalancing required.</div>
 
   </section>
